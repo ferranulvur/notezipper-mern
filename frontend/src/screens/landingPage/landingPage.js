@@ -4,10 +4,10 @@ import './landingPage.css';
 
 const LandingPage = () => {
     return (
-        <div class="main">
+        <div className="main">
         <Container>
-            <Row>
-                <div className="intro-text">
+            <Row className="">
+                <div className="t-center">
                     <h1>Safe Life</h1>
                     <p>
                         Safe Life is a web application that helps you to find the best places to live in your area.
