@@ -1,0 +1,20 @@
+.main{
+    min-height: 86vh;
+    display: flex;
+    align-items: center;
+    background-color: antiquewhite;
+    background-size: cover;
+    background-position: center;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.landingButton{
+    margin: 20px;
+    /* border-radius: 10px; */
+}
