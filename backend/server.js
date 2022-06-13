@@ -4,8 +4,12 @@ const notes = require('./data/notes');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
+const userRoutes = require('./routes/userRoutes.js');
+
 /* Initialize Dependencies */
 const app = express();
+app.use(express.json());
+
 dotenv.config();
 connectDB(process.env.MONGO_URI);
 
@@ -34,6 +38,8 @@ app.get("/api/notes/:id", (req, res) => {
         res.status(404).json({ message: "Note not found" });
     }
 });
+
+app.use('/api/users', userRoutes);
 
 /* Server Listener */
 app.listen(PORT, () => console.log('Server started on port ' + PORT));
