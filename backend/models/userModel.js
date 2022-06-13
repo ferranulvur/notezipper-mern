@@ -43,5 +43,9 @@ userSchema.pre('save', async function(next) {
     this.password = hashedPassword;
 });
 
+userSchema.methods.isValidPassword = async function(newPassword) {
+    return await bcrypt.compare(newPassword, this.password);
+}
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;
