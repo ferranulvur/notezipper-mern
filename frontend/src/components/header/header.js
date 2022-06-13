@@ -16,7 +16,7 @@ const Header = () => {
             >
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/mynotes">My Notes</Nav.Link>
-                <Nav.Link href="#">Link</Nav.Link>
+                <Nav.Link href="/" onClick={() => {localStorage.removeItem('userInfo')}}>Logout</Nav.Link>
             </Nav>
             <Form className="d-flex">
                 <FormControl

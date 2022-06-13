@@ -1,8 +1,18 @@
 // Import components from react-bootstrap
 import { Container, Row, Button } from 'react-bootstrap';
+import {useEffect} from 'react';
 import './landingPage.css';
 
 const LandingPage = () => {
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem('userInfo');
+        if(userInfo){
+            window.location.href = '/mynotes';
+        }
+    }
+    , [])
+
     return (
         <div className="main">
         <Container>
