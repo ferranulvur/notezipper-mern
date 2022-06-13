@@ -2,13 +2,15 @@
 const express = require('express');
 const notes = require('./data/notes');
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 
 /* Initialize Dependencies */
 const app = express();
 dotenv.config();
+connectDB(process.env.MONGO_URI);
 
 /* Declare Environment Variables */
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT;
 
 /* Get Routes*/
 
