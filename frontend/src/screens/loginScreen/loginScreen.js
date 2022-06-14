@@ -1,54 +1,30 @@
 import {React, useState, useEffect} from 'react'
-import axios from 'axios';
 import { Form, Button, Col, Row} from "react-bootstrap";
 import MainScreen from '../../components/mainScreen';
 import Loading from '../../components/loading';
 import ErrorMessage from '../../components/errorMessage';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../../actions/userActions';
 
 const LoginScreen = () => {
 
-    const submitHandler = async (event) => {
-        event.preventDefault();
-        setLoading(true);
-        try{
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-            const {data} = await axios.post(
-                '/api/users/login', 
-                {
-                    email: email,
-                    password: password
-                }, 
-                config
-            );
-            localStorage.setItem('userInfo', JSON.stringify(data));
-            console.log(data);
-            setLoading(false);
-            window.location.href = '/mynotes';
-        }
-        catch(err){
-            setError(err.response.data.message);
-            //console.log(err);
-            setLoading(false);
-        }
-        
-    }
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+
+    const dispatch = useDispatch();
+    const userLogin = useSelector((state) => state.userLogin);
+    const {loading, error, userInfo} = userLogin;
 
     useEffect(() => {
-        const userInfo = localStorage.getItem('userInfo');
         if(userInfo){
-            window.location.href = '/mynotes';
+            window.location.href = "/mynotes";
         }
+    }, [userInfo]);
+
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        dispatch(login(email, password));
     }
-    , [])
 
     if(loading){
 

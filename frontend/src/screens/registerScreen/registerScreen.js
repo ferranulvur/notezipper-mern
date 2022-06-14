@@ -1,59 +1,38 @@
 import {React, useState, useEffect} from 'react'
-import axios from 'axios';
 import { Form, Button, Col, Row} from "react-bootstrap";
 import MainScreen from '../../components/mainScreen';
+import {useDispatch, useSelector} from 'react-redux';
 import Loading from '../../components/loading';
 import ErrorMessage from '../../components/errorMessage';
+import {register} from '../../actions/userActions';
 
 const RegisterScreen = () => {
-
-    const submitHandler = async (event) => {
-        event.preventDefault();
-        setLoading(true);
-        if(password === confirmPassword){
-            try{
-                const config = {
-                    headers: {'Content-Type': 'application/json'}
-                }
-                const {data} = await axios.post(
-                    '/api/users/register', 
-                    {
-                        name: username,
-                        email: email,
-                        password: password,
-                        //pic: picture
-                    }, 
-                    config
-                );
-                localStorage.setItem('userInfo', JSON.stringify(data));
-                console.log(data);
-                setLoading(false);
-            }
-            catch(err){
-                setError(err.response.data.message);
-                setLoading(false);
-            }
-        } else{
-            setError("Passwords do not match");
-            setLoading(false);
-        }
-    }
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [message, setMessage] = useState(null);
     //const [picture, setPicture] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const userInfo = localStorage.getItem('userInfo');
-        if(userInfo){
-            window.location.href = '/mynotes';
+    const dispatch = useDispatch();
+    const userRegister = useSelector((state) => state.userRegister);
+    const {loading, error, userInfo} = userRegister;
+
+    const submitHandler = async (event) => {
+        event.preventDefault();
+        if(password !== confirmPassword){
+            setMessage("Passwords do not match");
+        } else {
+            dispatch(register(username, email, password));
         }
     }
-    , [])
+
+    useEffect(() => {
+        if(userInfo){
+            window.location.href = "/mynotes";
+        }
+    }, [userInfo]);
 
     if(loading){
         return (

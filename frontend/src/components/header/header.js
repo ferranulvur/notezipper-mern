@@ -1,7 +1,19 @@
 // import components from react-bootstrap
 import { Container, Navbar, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap';
+import { useDispatch, useSelector } from "react-redux";
+import {} from "react-router-dom";
+import { logout } from "../../actions/userActions";
 
 const Header = () => {
+
+    const dispatch = useDispatch();
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
+    const logoutHandler = () => {
+        dispatch(logout());
+    };
     
     return (
         <Navbar bg="light" expand="lg">
@@ -16,7 +28,7 @@ const Header = () => {
             >
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/mynotes">My Notes</Nav.Link>
-                <Nav.Link href="/" onClick={() => {localStorage.removeItem('userInfo')}}>Logout</Nav.Link>
+                <Nav.Link href="/" onClick={() => {logoutHandler()}}>Logout</Nav.Link>
             </Nav>
             <Form className="d-flex">
                 <FormControl
