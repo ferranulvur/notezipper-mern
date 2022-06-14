@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const { notFound, errorHandler} = require('./middlewares/errorMiddleware');
 const userRoutes = require('./routes/userRoutes.js');
+const noteRoutes = require('./routes/noteRoutes.js');
 
 /* Initialize Dependencies */
 const app = express();
@@ -40,6 +41,7 @@ app.get("/api/notes/:id", (req, res) => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/notes', noteRoutes);
 
 /* Server Listener */
 app.listen(PORT, () => console.log('Server started on port ' + PORT));
