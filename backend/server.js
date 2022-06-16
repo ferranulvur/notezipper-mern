@@ -24,22 +24,6 @@ app.get('/', (req, res) => {
     res.send('API Running!');
 });
 
-/* All notes */
-app.get("/api/notes", (req, res) => {
-    res.json(notes);
-});
-
-/* Note by Id */
-app.get("/api/notes/:id", (req, res) => {
-    const id = req.params.id;
-    const note = notes.find(note => note._id === id);
-    if (note) {
-        res.json(note);
-    } else {
-        res.status(404).json({ message: "Note not found" });
-    }
-});
-
 app.use('/api/users', userRoutes);
 app.use('/api/notes', noteRoutes);
 

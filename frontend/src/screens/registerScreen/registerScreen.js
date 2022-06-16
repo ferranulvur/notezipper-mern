@@ -36,7 +36,7 @@ const RegisterScreen = () => {
 
     if(loading){
         return (
-            <MainScreen title = 'Login'>
+            <MainScreen title = 'Register'>
                 <div className="container mt-5 loginContainer">
                     <Loading/>
                 </div>

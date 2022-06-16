@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {} from "react-router-dom";
 import { logout } from "../../actions/userActions";
 
-const Header = () => {
+const Header = ({setSearch}) => {
 
     const dispatch = useDispatch();
 
@@ -36,6 +36,7 @@ const Header = () => {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={(e)=>setSearch(e.target.value)}
                 />
                 <Button variant="outline-success">Search</Button>
             </Form>

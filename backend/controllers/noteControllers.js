@@ -3,7 +3,7 @@ const Note = require('../models/noteModel');
 
 const getNotes = asyncHandler(async (req, res) => {
     const notes = await Note.find({ user: req.user._id});
-    res.status(200).json({ message: 'Notes fetched successfully', notes });
+    res.status(200).json({ notes });
 });
 
 const createNote = asyncHandler(async (req, res) => {
